@@ -7,24 +7,24 @@ public class SetupScript : MonoBehaviour
     [SerializeField] private TMP_InputField mapNameInputField;
     [SerializeField] private Button startButton;
 
-    private const string MAP_NAME_DEFAULT = "2DOFMemoryDataGrabber";
-    private const string MAP_NAME_KEY = "MapName";
-
+    public static string MapNameKey => Constants.MAP_NAME_KEY;
+    public static string MapNameDefault => Constants.MAP_NAME_DEFAULT;
+    
     private void Awake()
     {
-        mapNameInputField.text = PlayerPrefs.HasKey(MAP_NAME_KEY)
-            ? PlayerPrefs.GetString(MAP_NAME_KEY)
-            : MAP_NAME_DEFAULT;
+        mapNameInputField.text = PlayerPrefs.HasKey(MapNameKey)
+            ? PlayerPrefs.GetString(MapNameKey)
+            : MapNameDefault;
 
         if (string.IsNullOrEmpty(mapNameInputField.text))
         {
-            mapNameInputField.text = MAP_NAME_DEFAULT;
+            mapNameInputField.text = MapNameDefault;
         }
     }
 
     private void OnDestroy()
     {
-        PlayerPrefs.SetString(MAP_NAME_KEY, mapNameInputField.text);
+        PlayerPrefs.SetString(MapNameKey, mapNameInputField.text);
     }
 
     private void OnEnable()
